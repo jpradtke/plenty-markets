@@ -1,0 +1,61 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    <title>AfterPay | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+{% set company = config("system.company") %}
+<div class="modal-body text-md-center">
+    <div class="container">
+        <div class="offset-md-4 col-md-4">
+            <img class="img-fluid" src="{{ plugin_path('AfterPay') }}/images/logos/AfterPay_logo.svg" />
+        </div>
+        <div class="offset-md-1 col-md-10">
+            <h3>Zahlen Sie bequem und einfach in monatlichen Raten</h3>
+            <p>
+                Ihre Ratenzahlung und den passenden Finanzierungsplan können Sie im Rahmen des Bestellprozesses auswählen.<br>
+                Ihr Antrag erfolgt komplett online und wird in wenigen Schritten hier im Shop abgeschlossen.
+            </p>
+            <h3>Nettodarlehensbetrag: {{ basketAmount|number_format(2, ',', '.') }} €</h3>
+        </div>
+
+        <div class="offset-md-1 col-md-10">
+            <div class="row">
+                {% for financingPlan in financingOptions %}
+                    <div class="col-md-10">
+                        <div style="margin: 15px 0">
+                            <form method="post" class="row">
+                                <div class="col-xs-8">
+                                    <h3>Plan {{ financingPlan.installmentProfileNumber }}</h3>
+                                    <table style="width:99%">
+                                        <tr>
+                                            <td>{{ financingPlan.numberOfInstallments }} monatliche Raten in Höhe von je</td>
+                                            <td>{{ financingPlan.installmentAmount|number_format(2, ',', '.') }}€</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="hidden" name="installment" value="{{ financingPlan | json_encode }}" />
+                                    <button type="submit" class="btn btn-block">auswählen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="offset-md-3 col-md-6">
+            <p>
+                * Zugleich repräsentatives Beispiel gem. § 6a PAngV<br>
+                Darlehensgeber: {{ company["name"] }}, {{ company["street"] }}, {{ company["zip"] }} {{ company["city"] }}, {{ company["country"] }}
+            </p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

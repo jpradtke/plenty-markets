@@ -1,0 +1,59 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    <title>AfterPay | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+{% set company = config("system.company") %}
+<div class="modal-body text-md-center">
+    <div class="container">
+        <div class="offset-md-4 col-md-4">
+            <img class="img-fluid" src="{{ plugin_path('AfterPay') }}/images/logos/AfterPay_logo.svg" />
+        </div>
+        <div class="col-md-12 modal-content">
+            <div class="modal-body">
+                <div class="cmp cmp-totals">
+                    <h2>Ratenzahlung Powered by AfterPay überprüfen</h2>
+                    <hr>
+                    <h3>Summe</h3>
+                    <div>
+                       <dl>
+                           <dt>Warenwert (Brutto)</dt>
+                           <dd>{{ basketItemAmount|localizedcurrency(currency) }}</dd>
+                           <dt>Versandkosten (Brutto)</dt>
+                           <dd>{{ basketShippingAmount|localizedcurrency(currency) }}</dd>
+                           <hr>
+                           <dt>Gesamtsumme (Netto)</dt>
+                           <dd>{{ basketAmountNet|localizedcurrency(currency) }}</dd>
+                           <dt>Gesamtsumme (Brutto)</dt>
+                           <dd>{{ basketAmountGro|localizedcurrency(currency) }}</dd>
+                           <hr>
+                           <dt>Finanzierungskosten</dt>
+                           <dd>{{ financingOption.totalInterestAmount|localizedcurrency(currency) }}</dd>
+                           <dt>Gesamtbetrag ( mit Finanzierungskosten)</dt>
+                           <dd>{{ financingOption.totalAmount|localizedcurrency(currency) }}</dd>
+                       </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/payment/afterPay/checkoutCancel/installment">
+                    <button class="btn btn-error pull-left">
+                        <i class="fa fa-cancel" aria-hidden="true"></i>Kauf abbrechen
+                    </button>
+                </a>
+                <a href="/payment/afterPay/prepareInstallment">
+                    <button class="btn btn-primary pull-right">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.orderBuyNow") }}
+                    </button>
+                </a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    <title>AfterPay | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+{% set company = config("system.company") %}
+
+    <div class="container-max page-content page-not-found">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="jumbotron default-not-found">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="display-3">{{ trans("Ceres::Template.notFoundOops") }}</h1>
+                            <p class="lead">
+                                {{ error.message }}
+                            </p>
+                            <hr class="m-y-2">
+                            <p class="lead">
+                                <a class="btn btn-primary btn-lg" href="/checkout" role="button"><i class="fa fa-arrow-right" aria-hidden="true"></i> {{ trans("Ceres::Template.orderCheckout") }}</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-right not-found-text">
+                            <img class="img-fluid" src="{{ plugin_path('AfterPay') }}/images/logos/AfterPay_logo.svg" />
+                        </div>
+                    </div>
+                </div>
+                {#<pre>{{ error.debug | json_encode }}</pre>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

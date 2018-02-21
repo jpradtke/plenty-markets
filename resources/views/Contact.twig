@@ -1,0 +1,72 @@
+{% extends getPartial('page-design') %}
+
+{% import "Ceres::PageDesign.Macros.LayoutContainer" as LayoutContainer %}
+
+{% block PartialHead %}
+    <title>AfterPay | {{ config("Ceres.header.company_name") }}</title>
+{% endblock %}
+
+{% block PageBody %}
+
+    {% set company = config("system.company") %}
+
+    <div class="container-max page-content page-not-found">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="jumbotron default-not-found">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="display-3">{{ trans("AfterPay::AfterPay.confirmAddress") }}</h1>
+                            <p class="lead">
+                                {{ trans("AfterPay::AfterPay.confirmYourAddress") }}
+                            </p>
+                            <table>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressFirstName") }}</th>
+                                    <td>{{ data.customer.firstName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressLastName") }}</th>
+                                    <td>{{ data.customer.lastName }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressStreet") }}</th>
+                                    <td>{{ data.customer.addressList.0.street }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressNumber") }}</th>
+                                    <td>{{ data.customer.addressList.0.streetNumber }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressZip") }}</th>
+                                    <td>{{ data.customer.addressList.0.postalCode }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.addressPlace") }}</th>
+                                    <td>{{ data.customer.addressList.0.postalPlace }}</td>
+                                </tr>
+                                <tr>
+                                    <th>{{ trans("Ceres::Template.generalCountry") }}</th>
+                                    <td>{{ data.customer.addressList.0.countryCode }}</td>
+                                </tr>
+                            </table>
+                            <hr class="m-y-2">
+                            <p class="lead">
+                                <a class="btn btn btn-lg" href="/payment/afterPay/checkoutCancel/{{ mode }}" role="button"><i class="fa fa-arrow-left"
+                                                                                                                              aria-hidden="true"></i> {{ trans("Ceres::Template.generalCancel") }}</a>
+                                <a class="btn btn-primary pull-right btn-lg" href="/payment/afterPay/checkoutSuccess/{{ mode }}&paymentId={{ paymentId }}" role="button"><i class="fa fa-arrow-right"
+                                                                                                                                                                 aria-hidden="true"></i> {{ trans("Ceres::Template.generalNext") }}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-right not-found-text">
+                            <img class="img-fluid" src="{{ plugin_path('AfterPay') }}/images/logos/AfterPay_logo.svg"/>
+                        </div>
+                    </div>
+                </div>
+                {#<pre>{{ data | json_encode }}</pre>#}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
