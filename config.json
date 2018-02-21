@@ -1,0 +1,16 @@
+[
+  {
+    "tab"       : "Global",
+    "key"       : "api.prodution",
+    "label"     : "API Endpoint Production",
+    "type"      : "text",
+    "default"   : "https://sandboxapi.horizonafs.com/eCommerceServicesWebApi"
+  },
+  {
+    "tab"       : "Global",
+    "key"       : "api.sandbox",
+    "label"     : "API Endpoint Sandbox",
+    "type"      : "text",
+    "default"   : "https://sandboxapi.horizonafs.com/eCommerceServicesWebApi"
+  }
+]

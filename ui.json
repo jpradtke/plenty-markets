@@ -1,0 +1,18 @@
+{
+  "defaultEntryPoint": "index.html",
+  "namespace": "PlentyAfterPay",
+  "menuEntries": [
+    {
+      "label": "Rechnung/Lastschrift",
+      "menu": "settings/orders/AfterPay",
+      "urlKey": "settings-AfterPay",
+      "entryPoint": "index.html?action=settings_afterpay"
+    },
+    {
+      "label": "Ratenzahlung",
+      "menu": "settings/orders/AfterPay",
+      "urlKey": "settings-AfterPay-installment",
+      "entryPoint": "index.html?action=settings_afterpay_installment"
+    }
+  ]
+}
